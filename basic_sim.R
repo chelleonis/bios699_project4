@@ -5,9 +5,6 @@ library(tictoc)
 # new needles > old needles ? GOAL: new needle mean deflection is 40% less than std needle
 
 #monte carlo simluation i think
-
-n_people <- 10 #this variable will vary 
-
 new_needles <- 500 #limit
 
 #biopsy cores
@@ -24,6 +21,8 @@ new_defl_PVC_sd <- 0.16
 # %decrease = 61%, the varaible we're looking for
 
 #new needle tip prelim results on turnips (cancerous tissue surrogate)
+
+
 std_defl_turn_mean <- 10.6
 new_defl_turn_mean <- 2.1
 
@@ -37,21 +36,34 @@ new_defl_turn_mean <- 2.1
 
 n_mc <- 10000
 mean_vector <- matrix(0,n_mc,3) #make it 2d for a dataframe or something
-colnames(mean_vector) <- c("new mean","standard mean","n_patients")
+colnames(mean_vector) <- c("new_mean","standard_mean","n_patients")
 #output of each run: mean deflection of std needle and mean deflection of new needle
 #loop until exhaust all needles
 # if needles < 12 (or amount needed)
 
+tic()
 for(i in 1:n_mc) {
- mean_vector[i,] <- needle_sim(4,8)
+ mean_vector[i,] <- needle_sim(4,8,500)
 }
+toc()
 
+#6 hundo
+n_mc <- 10000
+mean_vector_2 <- matrix(0,n_mc,3) #make it 2d for a dataframe or something
+colnames(mean_vector_2) <- c("new_mean","standard_mean","n_patients")
+
+
+tic()
+for(i in 1:n_mc) {
+  mean_vector_2[i,] <- needle_sim(4,8,600)
+}
+toc()
 
 
 #returns the mean of each needle deflections and other stuff and # of patients
-needle_sim <- function(targeted_bc, random_bc) {
+needle_sim <- function(targeted_bc, random_bc,n_needles) {
   patient_num <- 1
-  temp_needles <- 500 
+  temp_needles <- n_needles 
   temp_biop <- rep(NA,10)
   new_mean <- rep(NA,85)
   std_mean <- rep(NA,85)
