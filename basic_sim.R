@@ -47,9 +47,9 @@ for(i in 1:n_mc) {
 }
 toc()
 
-#6 hundo
+#600
 n_mc <- 10000
-mean_vector_2 <- matrix(0,n_mc,3) #make it 2d for a dataframe or something
+mean_vector_2 <- matrix(0,n_mc,3) 
 colnames(mean_vector_2) <- c("new_mean","standard_mean","n_patients")
 
 
