@@ -81,7 +81,7 @@ effect_size = log(1/0.6) #ln(1/0.6)
 
 #calculate power from these ops
 
-#paired is ok since we are performing these tests on similar subjects i think
+#paired is ok since we are performing these tests
 
 oWo <- pwr.t.test(d = effect_size, n = 60, sig.level = alpha, power = NULL,
             alternative = "greater", type = "paired")
